@@ -1,0 +1,212 @@
+[
+  {
+    "name": "imp_self",
+    "category": "prop_easy",
+    "difficulty": "easy",
+    "goal": "A \\<longrightarrow> A",
+    "expected_method": "auto"
+  },
+  {
+    "name": "and_left",
+    "category": "prop_easy",
+    "difficulty": "easy",
+    "goal": "A \\<and> B \\<longrightarrow> A",
+    "expected_method": "auto"
+  },
+  {
+    "name": "and_right",
+    "category": "prop_easy",
+    "difficulty": "easy",
+    "goal": "A \\<and> B \\<longrightarrow> B",
+    "expected_method": "auto"
+  },
+  {
+    "name": "or_intro_left",
+    "category": "prop_easy",
+    "difficulty": "easy",
+    "goal": "A \\<longrightarrow> A \\<or> B",
+    "expected_method": "auto"
+  },
+  {
+    "name": "and_comm",
+    "category": "prop_medium",
+    "difficulty": "easy",
+    "goal": "A \\<and> B \\<longrightarrow> B \\<and> A",
+    "expected_method": "auto"
+  },
+  {
+    "name": "imp_trans",
+    "category": "prop_medium",
+    "difficulty": "medium",
+    "goal": "(A \\<longrightarrow> B) \\<longrightarrow> (B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C",
+    "expected_method": "blast"
+  },
+  {
+    "name": "contradiction_implies_anything",
+    "category": "prop_medium",
+    "difficulty": "medium",
+    "goal": "A \\<longrightarrow> (\\<not> A \\<longrightarrow> B)",
+    "expected_method": "blast"
+  },
+  {
+    "name": "de_morgan_one",
+    "category": "prop_medium",
+    "difficulty": "medium",
+    "goal": "\\<not> A \\<and> \\<not> B \\<longrightarrow> \\<not> (A \\<or> B)",
+    "expected_method": "blast"
+  },
+  {
+    "name": "not_not_intro",
+    "category": "prop_medium",
+    "difficulty": "medium",
+    "goal": "A \\<longrightarrow> \\<not> (\\<not> A)",
+    "expected_method": "blast"
+  },
+  {
+    "name": "list_append_nil_right",
+    "category": "list_easy",
+    "difficulty": "easy",
+    "goal": "xs @ [] = xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_append_nil_left",
+    "category": "list_easy",
+    "difficulty": "easy",
+    "goal": "[] @ xs = xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "rev_rev",
+    "category": "list_easy",
+    "difficulty": "easy",
+    "goal": "rev (rev xs) = xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "length_append",
+    "category": "list_easy",
+    "difficulty": "easy",
+    "goal": "length (xs @ ys) = length xs + length ys",
+    "expected_method": "simp"
+  },
+  {
+    "name": "map_append",
+    "category": "list_easy",
+    "difficulty": "easy",
+    "goal": "map f (xs @ ys) = map f xs @ map f ys",
+    "expected_method": "simp"
+  },
+  {
+    "name": "rev_append",
+    "category": "list_medium",
+    "difficulty": "medium",
+    "goal": "rev (xs @ ys) = rev ys @ rev xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "length_rev",
+    "category": "list_easy",
+    "difficulty": "easy",
+    "goal": "length (rev xs) = length xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "take_zero",
+    "category": "list_easy",
+    "difficulty": "easy",
+    "goal": "take 0 xs = []",
+    "expected_method": "simp"
+  },
+  {
+    "name": "drop_zero",
+    "category": "list_easy",
+    "difficulty": "easy",
+    "goal": "drop 0 xs = xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "append_assoc",
+    "category": "list_medium",
+    "difficulty": "medium",
+    "goal": "(xs @ ys) @ zs = xs @ (ys @ zs)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "hd_cons",
+    "category": "list_easy",
+    "difficulty": "easy",
+    "goal": "hd (x # xs) = x",
+    "expected_method": "simp"
+  },
+  {
+    "name": "tl_cons",
+    "category": "list_easy",
+    "difficulty": "easy",
+    "goal": "tl (x # xs) = xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "member_append",
+    "category": "list_medium",
+    "difficulty": "medium",
+    "goal": "x \\<in> set (xs @ ys) \\<longleftrightarrow> x \\<in> set xs \\<or> x \\<in> set ys",
+    "expected_method": "auto"
+  },
+  {
+    "name": "set_rev",
+    "category": "list_medium",
+    "difficulty": "medium",
+    "goal": "set (rev xs) = set xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_add_zero_right",
+    "category": "nat_easy",
+    "difficulty": "easy",
+    "goal": "n + 0 = (n::nat)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_add_zero_left",
+    "category": "nat_easy",
+    "difficulty": "easy",
+    "goal": "0 + n = (n::nat)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_add_comm",
+    "category": "nat_medium",
+    "difficulty": "medium",
+    "goal": "m + n = n + (m::nat)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_add_assoc",
+    "category": "nat_medium",
+    "difficulty": "medium",
+    "goal": "(a + b) + c = a + (b + (c::nat))",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_mult_zero_right",
+    "category": "nat_easy",
+    "difficulty": "easy",
+    "goal": "n * 0 = (0::nat)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_mult_one_right",
+    "category": "nat_easy",
+    "difficulty": "easy",
+    "goal": "n * 1 = (n::nat)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_less_imp_le",
+    "category": "nat_medium",
+    "difficulty": "medium",
+    "goal": "(n::nat) < m \\<longrightarrow> n \\<le> m",
+    "expected_method": "auto"
+  }
+]
