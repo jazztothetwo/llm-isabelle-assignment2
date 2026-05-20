@@ -73,20 +73,40 @@ def _normalize_type(rt: Any) -> str:
 
 
 def _decode_body_to_dict(body: Any) -> Optional[Dict[str, Any]]:
-    """Body may be dict/JSON string/bytes; return dict or None."""
+    """Body may be dict/JSON string/bytes/object; return dict or None."""
     if body is None:
         return None
+
+    if isinstance(body, dict):
+        return body
+
     if isinstance(body, (bytes, bytearray)):
         try:
             body = body.decode("utf-8", "replace")
         except Exception:
             body = str(body)
-    if isinstance(body, dict):
-        return body
-    try:
-        return json.loads(body)
-    except Exception:
-        return None
+
+    if isinstance(body, str):
+        try:
+            return json.loads(body)
+        except Exception:
+            return None
+
+    # Pydantic-style objects
+    if hasattr(body, "model_dump"):
+        try:
+            return body.model_dump()
+        except Exception:
+            pass
+
+    # dataclass / normal Python object fallback
+    if hasattr(body, "__dict__"):
+        try:
+            return dict(body.__dict__)
+        except Exception:
+            pass
+
+    return None
 
 
 # ------------------ Public utils ------------------

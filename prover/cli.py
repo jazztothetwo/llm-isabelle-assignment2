@@ -234,9 +234,25 @@ def main():
     try:
         server_info, proc = start_isabelle_server(name="isabelle", log_file="server.log")
         print(server_info.strip())
+
         isabelle = get_isabelle_client(server_info)
-        session_id = isabelle.session_start(session="HOL")
+
+        responses = list(isabelle.session_start(session="HOL"))
+
+        session_id = None
+        for r in responses:
+            if getattr(r, "response_type", None).value == "FINISHED":
+                session_id = r.response_body.session_id
+                break
+
+        if session_id is None:
+            raise RuntimeError(f"Could not start Isabelle session: {responses}")
+
         print("session_id:", session_id)
+
+
+
+
 
         # Mine macros from existing logs (fast; skips if file missing)
         macro_map = mine_two_step_macros()
