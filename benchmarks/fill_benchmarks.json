@@ -1,0 +1,38 @@
+[
+  {
+    "name": "fill_and_comm",
+    "category": "fill_prop",
+    "difficulty": "easy",
+    "script": "lemma \"A \\<and> B \\<longrightarrow> B \\<and> A\"\nproof\n  assume h: \"A \\<and> B\"\n  show \"B \\<and> A\"\n    sorry\nqed"
+  },
+  {
+    "name": "fill_imp_trans",
+    "category": "fill_prop",
+    "difficulty": "medium",
+    "script": "lemma \"(A \\<longrightarrow> B) \\<longrightarrow> (B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C\"\nproof\n  assume ab: \"A \\<longrightarrow> B\"\n  show \"(B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C\"\n  proof\n    assume bc: \"B \\<longrightarrow> C\"\n    show \"A \\<longrightarrow> C\"\n    proof\n      assume a: A\n      show C\n        sorry\n    qed\n  qed\nqed"
+  },
+  {
+    "name": "fill_de_morgan",
+    "category": "fill_prop",
+    "difficulty": "medium",
+    "script": "lemma \"\\<not> A \\<and> \\<not> B \\<longrightarrow> \\<not> (A \\<or> B)\"\nproof\n  assume h: \"\\<not> A \\<and> \\<not> B\"\n  show \"\\<not> (A \\<or> B)\"\n    sorry\nqed"
+  },
+  {
+    "name": "fill_rev_rev",
+    "category": "fill_list",
+    "difficulty": "easy",
+    "script": "lemma \"rev (rev xs) = xs\"\n  sorry"
+  },
+  {
+    "name": "fill_map_append",
+    "category": "fill_list",
+    "difficulty": "easy",
+    "script": "lemma \"map f (xs @ ys) = map f xs @ map f ys\"\n  sorry"
+  },
+  {
+    "name": "fill_take_length_append",
+    "category": "fill_list",
+    "difficulty": "medium",
+    "script": "lemma \"take (length xs) (xs @ ys) = xs\"\n  sorry"
+  }
+]
