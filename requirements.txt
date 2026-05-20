@@ -7,3 +7,4 @@ tabulate
 fastapi 
 uvicorn
 torch
+isabelle-client
