@@ -166,7 +166,7 @@ def _print_state_before_hole(isabelle, session: str, full_text: str, hole_span: 
 # ========== Counterexample Hints ==========
 
 def _normalize_isabelle_symbols(s: str) -> str:
-    """Make Isabelle symbols friendlier in short snippets (e.g., a\<^sub>1 → a_1)."""
+    r"""Make Isabelle symbols friendlier in short snippets (e.g., a\<^sub>1 → a_1)."""
     if not s:
         return s
     # subscripts: x\<^sub>12 → x_12
@@ -342,7 +342,7 @@ def _parse_assumptions_from_state(state_block: str) -> List[str]:
     return assumptions[:5]
 
 def _strip_all_forall_prefixes(prop: str) -> str:
-    """Remove leading ⋀x y z. / \<And>x y. prefixes (possibly many)."""
+    r"""Remove leading ⋀x y z. / \<And>x y. prefixes (possibly many)."""
     if not prop:
         return prop
     # Match one or more names (incl. type/commas) up to the first dot after a ⋀/\<And>
