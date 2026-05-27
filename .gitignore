@@ -5,5 +5,4 @@ __pycache__/
 .venv/
 .env
 logs/
-results/
 tmp_fill_check/
