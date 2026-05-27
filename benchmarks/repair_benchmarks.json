@@ -1,0 +1,30 @@
+[
+  {
+    "name": "repair_fill_sorry_rev",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "rev (rev xs) = xs",
+    "script": "lemma \"rev (rev xs) = xs\"\n  sorry"
+  },
+  {
+    "name": "repair_missing_using_and_comm",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<and> B \\<longrightarrow> B \\<and> A",
+    "script": "lemma \"A \\<and> B \\<longrightarrow> B \\<and> A\"\nproof\n  assume h: \"A \\<and> B\"\n  show \"B \\<and> A\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_wrong_method_and_comm",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<and> B \\<longrightarrow> B \\<and> A",
+    "script": "lemma \"A \\<and> B \\<longrightarrow> B \\<and> A\"\nproof\n  assume h: \"A \\<and> B\"\n  show \"B \\<and> A\"\n    by arith\nqed"
+  },
+  {
+    "name": "repair_bad_whole_proof_rev",
+    "category": "repair_whole",
+    "difficulty": "medium",
+    "goal": "rev (rev xs) = xs",
+    "script": "lemma \"rev (rev xs) = xs\"\nproof\n  show \"rev xs = xs\"\n    by simp\nqed"
+  }
+]
