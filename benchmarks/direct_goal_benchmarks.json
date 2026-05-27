@@ -1,0 +1,212 @@
+[
+  {
+    "name": "prop_imp_self",
+    "category": "prop_logic",
+    "difficulty": "easy",
+    "goal": "P \\<longrightarrow> P",
+    "expected_method": "simp/auto"
+  },
+  {
+    "name": "prop_and_comm",
+    "category": "prop_logic",
+    "difficulty": "easy",
+    "goal": "P \\<and> Q \\<longleftrightarrow> Q \\<and> P",
+    "expected_method": "blast"
+  },
+  {
+    "name": "prop_or_comm",
+    "category": "prop_logic",
+    "difficulty": "easy",
+    "goal": "P \\<or> Q \\<longleftrightarrow> Q \\<or> P",
+    "expected_method": "blast"
+  },
+  {
+    "name": "prop_imp_trans",
+    "category": "prop_logic",
+    "difficulty": "easy",
+    "goal": "(P \\<longrightarrow> Q) \\<longrightarrow> (Q \\<longrightarrow> R) \\<longrightarrow> P \\<longrightarrow> R",
+    "expected_method": "blast"
+  },
+  {
+    "name": "prop_de_morgan_and",
+    "category": "prop_logic",
+    "difficulty": "easy",
+    "goal": "\\<not> (P \\<and> Q) \\<longleftrightarrow> \\<not> P \\<or> \\<not> Q",
+    "expected_method": "blast"
+  },
+  {
+    "name": "list_append_nil_right",
+    "category": "list_basic",
+    "difficulty": "easy",
+    "goal": "xs @ [] = xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_append_assoc",
+    "category": "list_basic",
+    "difficulty": "easy",
+    "goal": "(xs @ ys) @ zs = xs @ (ys @ zs)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_rev_rev",
+    "category": "list_basic",
+    "difficulty": "easy",
+    "goal": "rev (rev xs) = xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_length_append",
+    "category": "list_basic",
+    "difficulty": "easy",
+    "goal": "length (xs @ ys) = length xs + length ys",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_map_append",
+    "category": "list_basic",
+    "difficulty": "easy",
+    "goal": "map f (xs @ ys) = map f xs @ map f ys",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_filter_append",
+    "category": "list_basic",
+    "difficulty": "easy",
+    "goal": "filter P (xs @ ys) = filter P xs @ filter P ys",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_take_length_append",
+    "category": "list_basic",
+    "difficulty": "easy",
+    "goal": "take (length xs) (xs @ ys) = xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_drop_length_append",
+    "category": "list_basic",
+    "difficulty": "easy",
+    "goal": "drop (length xs) (xs @ ys) = ys",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_set_append",
+    "category": "list_set",
+    "difficulty": "easy",
+    "goal": "set (xs @ ys) = set xs \\<union> set ys",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_set_map",
+    "category": "list_set",
+    "difficulty": "easy",
+    "goal": "set (map f xs) = f ` set xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_set_filter",
+    "category": "list_set",
+    "difficulty": "easy",
+    "goal": "set (filter P xs) = {x \\<in> set xs. P x}",
+    "expected_method": "auto/simp"
+  },
+  {
+    "name": "list_length_map",
+    "category": "list_basic",
+    "difficulty": "easy",
+    "goal": "length (map f xs) = length xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_map_map",
+    "category": "list_basic",
+    "difficulty": "medium",
+    "goal": "map f (map g xs) = map (f \\<circ> g) xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_foldr_append",
+    "category": "list_fold",
+    "difficulty": "medium",
+    "goal": "foldr f (xs @ ys) z = foldr f xs (foldr f ys z)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_foldl_append",
+    "category": "list_fold",
+    "difficulty": "medium",
+    "goal": "foldl f z (xs @ ys) = foldl f (foldl f z xs) ys",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_takeWhile_append_dropWhile",
+    "category": "list_medium",
+    "difficulty": "medium",
+    "goal": "takeWhile P xs @ dropWhile P xs = xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_remdups_set",
+    "category": "list_set",
+    "difficulty": "medium",
+    "goal": "set (remdups xs) = set xs",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_distinct_filter",
+    "category": "list_set",
+    "difficulty": "medium",
+    "goal": "distinct xs \\<Longrightarrow> distinct (filter P xs)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "list_zip_length",
+    "category": "list_medium",
+    "difficulty": "hard",
+    "goal": "length (zip xs ys) = min (length xs) (length ys)",
+    "expected_method": "induction xs arbitrary: ys; cases ys; simp"
+  },
+  {
+    "name": "list_nth_map",
+    "category": "list_medium",
+    "difficulty": "hard",
+    "goal": "i < length xs \\<Longrightarrow> map f xs ! i = f (xs ! i)",
+    "expected_method": "induction xs arbitrary: i; cases i; simp"
+  },
+  {
+    "name": "nat_add_comm",
+    "category": "nat_arith",
+    "difficulty": "easy",
+    "goal": "m + n = n + (m::nat)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_add_assoc",
+    "category": "nat_arith",
+    "difficulty": "easy",
+    "goal": "(m + n) + p = m + (n + (p::nat))",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_mul_comm",
+    "category": "nat_arith",
+    "difficulty": "medium",
+    "goal": "m * n = n * (m::nat)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_distrib",
+    "category": "nat_arith",
+    "difficulty": "medium",
+    "goal": "(m + n) * p = m * p + n * (p::nat)",
+    "expected_method": "simp"
+  },
+  {
+    "name": "nat_pow_add",
+    "category": "nat_arith",
+    "difficulty": "medium",
+    "goal": "(m::nat) ^ (n + p) = m ^ n * m ^ p",
+    "expected_method": "simp add: power_add"
+  }
+]
