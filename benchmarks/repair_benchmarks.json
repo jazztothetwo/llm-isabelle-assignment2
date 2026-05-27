@@ -3,23 +3,13 @@
     "name": "repair_fill_sorry_rev",
     "category": "repair_fill",
     "difficulty": "easy",
-    "expected_stage": "fill",
     "goal": "rev (rev xs) = xs",
     "script": "lemma \"rev (rev xs) = xs\"\n  sorry"
-  },
-  {
-    "name": "repair_fill_sorry_imp_trans",
-    "category": "repair_fill",
-    "difficulty": "medium",
-    "expected_stage": "fill_using_local_assumptions",
-    "goal": "(A \\<longrightarrow> B) \\<longrightarrow> (B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C",
-    "script": "lemma \"(A \\<longrightarrow> B) \\<longrightarrow> (B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C\"\nproof\n  assume ab: \"A \\<longrightarrow> B\"\n  show \"(B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C\"\n  proof\n    assume bc: \"B \\<longrightarrow> C\"\n    show \"A \\<longrightarrow> C\"\n    proof\n      assume a: A\n      show C\n        sorry\n    qed\n  qed\nqed"
   },
   {
     "name": "repair_missing_using_and_comm",
     "category": "repair_local",
     "difficulty": "easy",
-    "expected_stage": "deterministic_local",
     "goal": "A \\<and> B \\<longrightarrow> B \\<and> A",
     "script": "lemma \"A \\<and> B \\<longrightarrow> B \\<and> A\"\nproof\n  assume h: \"A \\<and> B\"\n  show \"B \\<and> A\"\n    by simp\nqed"
   },
@@ -27,88 +17,371 @@
     "name": "repair_wrong_method_and_comm",
     "category": "repair_local",
     "difficulty": "easy",
-    "expected_stage": "deterministic_local",
     "goal": "A \\<and> B \\<longrightarrow> B \\<and> A",
     "script": "lemma \"A \\<and> B \\<longrightarrow> B \\<and> A\"\nproof\n  assume h: \"A \\<and> B\"\n  show \"B \\<and> A\"\n    by arith\nqed"
-  },
-  {
-    "name": "repair_wrong_method_imp_trans",
-    "category": "repair_local",
-    "difficulty": "medium",
-    "expected_stage": "deterministic_local",
-    "goal": "(A \\<longrightarrow> B) \\<longrightarrow> (B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C",
-    "script": "lemma \"(A \\<longrightarrow> B) \\<longrightarrow> (B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C\"\nproof\n  assume ab: \"A \\<longrightarrow> B\"\n  show \"(B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C\"\n  proof\n    assume bc: \"B \\<longrightarrow> C\"\n    show \"A \\<longrightarrow> C\"\n    proof\n      assume a: A\n      show C\n        by arith\n    qed\n  qed\nqed"
-  },
-  {
-    "name": "repair_missing_using_de_morgan",
-    "category": "repair_local",
-    "difficulty": "medium",
-    "expected_stage": "deterministic_local",
-    "goal": "\\<not> A \\<and> \\<not> B \\<longrightarrow> \\<not> (A \\<or> B)",
-    "script": "lemma \"\\<not> A \\<and> \\<not> B \\<longrightarrow> \\<not> (A \\<or> B)\"\nproof\n  assume h: \"\\<not> A \\<and> \\<not> B\"\n  show \"\\<not> (A \\<or> B)\"\n    by simp\nqed"
   },
   {
     "name": "repair_bad_whole_proof_rev",
     "category": "repair_whole",
     "difficulty": "medium",
-    "expected_stage": "deterministic_whole",
     "goal": "rev (rev xs) = xs",
     "script": "lemma \"rev (rev xs) = xs\"\nproof\n  show \"rev xs = xs\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_fill_sorry_append_nil_right",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "xs @ [] = xs",
+    "script": "lemma \"xs @ [] = xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_append_nil_left",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "[] @ xs = xs",
+    "script": "lemma \"[] @ xs = xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_append_assoc",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "(xs @ ys) @ zs = xs @ (ys @ zs)",
+    "script": "lemma \"(xs @ ys) @ zs = xs @ (ys @ zs)\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_rev_rev",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "rev (rev xs) = xs",
+    "script": "lemma \"rev (rev xs) = xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_rev_append",
+    "category": "repair_fill",
+    "difficulty": "medium",
+    "goal": "rev (xs @ ys) = rev ys @ rev xs",
+    "script": "lemma \"rev (xs @ ys) = rev ys @ rev xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_length_append",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "length (xs @ ys) = length xs + length ys",
+    "script": "lemma \"length (xs @ ys) = length xs + length ys\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_length_rev",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "length (rev xs) = length xs",
+    "script": "lemma \"length (rev xs) = length xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_length_map",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "length (map f xs) = length xs",
+    "script": "lemma \"length (map f xs) = length xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_map_append",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "map f (xs @ ys) = map f xs @ map f ys",
+    "script": "lemma \"map f (xs @ ys) = map f xs @ map f ys\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_map_map",
+    "category": "repair_fill",
+    "difficulty": "medium",
+    "goal": "map f (map g xs) = map (f \\<circ> g) xs",
+    "script": "lemma \"map f (map g xs) = map (f \\<circ> g) xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_filter_append",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "filter P (xs @ ys) = filter P xs @ filter P ys",
+    "script": "lemma \"filter P (xs @ ys) = filter P xs @ filter P ys\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_filter_filter",
+    "category": "repair_fill",
+    "difficulty": "medium",
+    "goal": "filter P (filter Q xs) = filter (\\<lambda>x. P x \\<and> Q x) xs",
+    "script": "lemma \"filter P (filter Q xs) = filter (\\<lambda>x. P x \\<and> Q x) xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_take_zero",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "take 0 xs = []",
+    "script": "lemma \"take 0 xs = []\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_drop_zero",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "drop 0 xs = xs",
+    "script": "lemma \"drop 0 xs = xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_take_length_append",
+    "category": "repair_fill",
+    "difficulty": "medium",
+    "goal": "take (length xs) (xs @ ys) = xs",
+    "script": "lemma \"take (length xs) (xs @ ys) = xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_drop_length_append",
+    "category": "repair_fill",
+    "difficulty": "medium",
+    "goal": "drop (length xs) (xs @ ys) = ys",
+    "script": "lemma \"drop (length xs) (xs @ ys) = ys\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_take_all",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "take (length xs) xs = xs",
+    "script": "lemma \"take (length xs) xs = xs\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_drop_all",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "drop (length xs) xs = []",
+    "script": "lemma \"drop (length xs) xs = []\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_hd_cons",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "hd (x # xs) = x",
+    "script": "lemma \"hd (x # xs) = x\"\n  sorry"
+  },
+  {
+    "name": "repair_fill_sorry_tl_cons",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "tl (x # xs) = xs",
+    "script": "lemma \"tl (x # xs) = xs\"\n  sorry"
+  },
+  {
+    "name": "repair_missing_using_and_elim_left",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<and> B \\<longrightarrow> A",
+    "script": "lemma \"A \\<and> B \\<longrightarrow> A\"\nproof\n  assume h: \"A \\<and> B\"\n  show \"A\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_wrong_method_and_elim_left",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<and> B \\<longrightarrow> A",
+    "script": "lemma \"A \\<and> B \\<longrightarrow> A\"\nproof\n  assume h: \"A \\<and> B\"\n  show \"A\"\n    by arith\nqed"
+  },
+  {
+    "name": "repair_missing_using_and_elim_right",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<and> B \\<longrightarrow> B",
+    "script": "lemma \"A \\<and> B \\<longrightarrow> B\"\nproof\n  assume h: \"A \\<and> B\"\n  show \"B\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_wrong_method_and_elim_right",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<and> B \\<longrightarrow> B",
+    "script": "lemma \"A \\<and> B \\<longrightarrow> B\"\nproof\n  assume h: \"A \\<and> B\"\n  show \"B\"\n    by arith\nqed"
+  },
+  {
+    "name": "repair_missing_using_or_intro_left",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<longrightarrow> A \\<or> B",
+    "script": "lemma \"A \\<longrightarrow> A \\<or> B\"\nproof\n  assume h: \"A\"\n  show \"A \\<or> B\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_wrong_method_or_intro_left",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<longrightarrow> A \\<or> B",
+    "script": "lemma \"A \\<longrightarrow> A \\<or> B\"\nproof\n  assume h: \"A\"\n  show \"A \\<or> B\"\n    by arith\nqed"
+  },
+  {
+    "name": "repair_missing_using_imp_refl",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<longrightarrow> A",
+    "script": "lemma \"A \\<longrightarrow> A\"\nproof\n  assume h: \"A\"\n  show \"A\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_wrong_method_imp_refl",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<longrightarrow> A",
+    "script": "lemma \"A \\<longrightarrow> A\"\nproof\n  assume h: \"A\"\n  show \"A\"\n    by arith\nqed"
+  },
+  {
+    "name": "repair_missing_using_double_neg_intro",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<longrightarrow> \\<not> \\<not> A",
+    "script": "lemma \"A \\<longrightarrow> \\<not> \\<not> A\"\nproof\n  assume h: \"A\"\n  show \"\\<not> \\<not> A\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_wrong_method_double_neg_intro",
+    "category": "repair_local",
+    "difficulty": "easy",
+    "goal": "A \\<longrightarrow> \\<not> \\<not> A",
+    "script": "lemma \"A \\<longrightarrow> \\<not> \\<not> A\"\nproof\n  assume h: \"A\"\n  show \"\\<not> \\<not> A\"\n    by arith\nqed"
+  },
+  {
+    "name": "repair_missing_using_de_morgan_local",
+    "category": "repair_local",
+    "difficulty": "medium",
+    "goal": "\\<not> A \\<and> \\<not> B \\<longrightarrow> \\<not> (A \\<or> B)",
+    "script": "lemma \"\\<not> A \\<and> \\<not> B \\<longrightarrow> \\<not> (A \\<or> B)\"\nproof\n  assume h: \"\\<not> A \\<and> \\<not> B\"\n  show \"\\<not> (A \\<or> B)\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_wrong_method_de_morgan_local",
+    "category": "repair_local",
+    "difficulty": "medium",
+    "goal": "\\<not> A \\<and> \\<not> B \\<longrightarrow> \\<not> (A \\<or> B)",
+    "script": "lemma \"\\<not> A \\<and> \\<not> B \\<longrightarrow> \\<not> (A \\<or> B)\"\nproof\n  assume h: \"\\<not> A \\<and> \\<not> B\"\n  show \"\\<not> (A \\<or> B)\"\n    by arith\nqed"
+  },
+  {
+    "name": "repair_bad_whole_length_map",
+    "category": "repair_whole",
+    "difficulty": "medium",
+    "goal": "length (map f xs) = length xs",
+    "script": "lemma \"length (map f xs) = length xs\"\nproof\n  show \"length xs = length xs\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_bad_whole_length_append",
+    "category": "repair_whole",
+    "difficulty": "medium",
+    "goal": "length (xs @ ys) = length xs + length ys",
+    "script": "lemma \"length (xs @ ys) = length xs + length ys\"\nproof\n  show \"length xs = length xs\"\n    by simp\nqed"
   },
   {
     "name": "repair_bad_whole_map_append",
     "category": "repair_whole",
     "difficulty": "medium",
-    "expected_stage": "deterministic_whole",
     "goal": "map f (xs @ ys) = map f xs @ map f ys",
-    "script": "lemma \"map f (xs @ ys) = map f xs @ map f ys\"\nproof (induction ys)\n  case Nil\n  show ?case by simp\nnext\n  case (Cons a as)\n  show ?case by simp\nqed"
+    "script": "lemma \"map f (xs @ ys) = map f xs @ map f ys\"\nproof\n  show \"map f xs = map f xs\"\n    by simp\nqed"
   },
   {
-    "name": "repair_bad_whole_length_append",
+    "name": "repair_bad_whole_filter_append",
     "category": "repair_whole",
-    "difficulty": "easy",
-    "expected_stage": "deterministic_whole",
-    "goal": "length (xs @ ys) = length xs + length ys",
-    "script": "lemma \"length (xs @ ys) = length xs + length ys\"\nproof (induction ys)\n  case Nil\n  show ?case by simp\nnext\n  case (Cons a as)\n  show ?case by simp\nqed"
+    "difficulty": "medium",
+    "goal": "filter P (xs @ ys) = filter P xs @ filter P ys",
+    "script": "lemma \"filter P (xs @ ys) = filter P xs @ filter P ys\"\nproof\n  show \"filter P xs = filter P xs\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_bad_whole_set_append",
+    "category": "repair_whole",
+    "difficulty": "medium",
+    "goal": "set (xs @ ys) = set xs \\<union> set ys",
+    "script": "lemma \"set (xs @ ys) = set xs \\<union> set ys\"\nproof\n  show \"set xs = set xs\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_bad_whole_nat_add_comm",
+    "category": "repair_whole",
+    "difficulty": "medium",
+    "goal": "m + n = n + (m::nat)",
+    "script": "lemma \"m + n = n + (m::nat)\"\nproof\n  show \"m = (m::nat)\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_bad_whole_nat_mul_comm",
+    "category": "repair_whole",
+    "difficulty": "medium",
+    "goal": "m * n = n * (m::nat)",
+    "script": "lemma \"m * n = n * (m::nat)\"\nproof\n  show \"m = (m::nat)\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_bad_whole_append_assoc",
+    "category": "repair_whole",
+    "difficulty": "medium",
+    "goal": "(xs @ ys) @ zs = xs @ (ys @ zs)",
+    "script": "lemma \"(xs @ ys) @ zs = xs @ (ys @ zs)\"\nproof\n  show \"xs @ ys = xs @ ys\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_bad_whole_rev_append",
+    "category": "repair_whole",
+    "difficulty": "medium",
+    "goal": "rev (xs @ ys) = rev ys @ rev xs",
+    "script": "lemma \"rev (xs @ ys) = rev ys @ rev xs\"\nproof\n  show \"rev xs = rev xs\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_bad_whole_foldr_append",
+    "category": "repair_whole",
+    "difficulty": "medium",
+    "goal": "foldr f (xs @ ys) z = foldr f xs (foldr f ys z)",
+    "script": "lemma \"foldr f (xs @ ys) z = foldr f xs (foldr f ys z)\"\nproof\n  show \"foldr f xs z = foldr f xs z\"\n    by simp\nqed"
+  },
+  {
+    "name": "repair_wrong_induction_variable",
+    "category": "repair_stress",
+    "difficulty": "hard",
+    "goal": "length (replicate n x) = n",
+    "script": "lemma \"length (replicate n x) = n\"\nproof (induction x)\n  case 0 show ?case by simp\nnext\n  case (Suc x) show ?case by simp\nqed"
+  },
+  {
+    "name": "repair_wrong_induct_zip",
+    "category": "repair_stress",
+    "difficulty": "hard",
+    "goal": "length (zip xs ys) = min (length xs) (length ys)",
+    "script": "lemma \"length (zip xs ys) = min (length xs) (length ys)\"\nproof (induction xs)\n  case Nil show ?case by simp\nnext\n  case (Cons a as) show ?case by simp\nqed"
+  },
+  {
+    "name": "repair_missing_case_split",
+    "category": "repair_stress",
+    "difficulty": "hard",
+    "goal": "filter P (filter Q xs) = filter (\\<lambda>x. P x \\<and> Q x) xs",
+    "script": "lemma \"filter P (filter Q xs) = filter (\\<lambda>x. P x \\<and> Q x) xs\"\nproof (induction xs)\n  case Nil show ?case by simp\nnext\n  case (Cons a as) show ?case by simp\nqed"
   },
   {
     "name": "repair_wrong_show_goal_rev",
-    "category": "repair_whole",
-    "difficulty": "medium",
-    "expected_stage": "deterministic_whole",
+    "category": "repair_stress",
+    "difficulty": "hard",
     "goal": "rev (rev xs) = xs",
-    "script": "lemma \"rev (rev xs) = xs\"\nproof (induction xs)\n  case Nil\n  show ?case by simp\nnext\n  case (Cons a as)\n  show \"rev (rev as) = as\"\n    using Cons.IH by simp\nqed"
+    "script": "lemma \"rev (rev xs) = xs\"\nproof (induction xs)\n  case Nil show ?case by simp\nnext\n  case (Cons a as)\n  show \"rev (rev as) = as\"\n    using Cons.IH by simp\nqed"
   },
   {
-    "name": "repair_wrong_induction_variable_length_replicate",
-    "category": "repair_hard",
-    "difficulty": "hard",
-    "expected_stage": "cegis_or_whole_fallback",
-    "goal": "length (replicate n x) = n",
-    "script": "lemma \"length (replicate n x) = n\"\nproof (induction x)\n  case 0\n  show ?case by simp\nnext\n  case (Suc x)\n  show ?case by simp\nqed"
+    "name": "repair_extra_fill_sorry_bool_and_comm",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "P \\<and> Q \\<longleftrightarrow> Q \\<and> P",
+    "script": "lemma \"P \\<and> Q \\<longleftrightarrow> Q \\<and> P\"\n  sorry"
   },
   {
-    "name": "repair_missing_case_split_zip_length",
-    "category": "repair_hard",
-    "difficulty": "hard",
-    "expected_stage": "cegis_or_whole_fallback",
-    "goal": "length (zip xs ys) = min (length xs) (length ys)",
-    "script": "lemma \"length (zip xs ys) = min (length xs) (length ys)\"\nproof (induction xs arbitrary: ys)\n  case Nil\n  show ?case by simp\nnext\n  case (Cons x xs)\n  show ?case by simp\nqed"
+    "name": "repair_extra_fill_sorry_bool_or_comm",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "P \\<or> Q \\<longleftrightarrow> Q \\<or> P",
+    "script": "lemma \"P \\<or> Q \\<longleftrightarrow> Q \\<or> P\"\n  sorry"
   },
   {
-    "name": "repair_missing_arbitrary_foldl",
-    "category": "repair_hard",
-    "difficulty": "hard",
-    "expected_stage": "cegis_or_whole_fallback",
-    "goal": "foldl f z (xs @ ys) = foldl f (foldl f z xs) ys",
-    "script": "lemma \"foldl f z (xs @ ys) = foldl f (foldl f z xs) ys\"\nproof (induction xs)\n  case Nil\n  show ?case by simp\nnext\n  case (Cons a as)\n  show ?case by simp\nqed"
+    "name": "repair_extra_fill_sorry_bool_and_assoc",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "(P \\<and> Q) \\<and> R \\<longleftrightarrow> P \\<and> (Q \\<and> R)",
+    "script": "lemma \"(P \\<and> Q) \\<and> R \\<longleftrightarrow> P \\<and> (Q \\<and> R)\"\n  sorry"
   },
   {
-    "name": "repair_wrong_apply_tactic_map_map",
-    "category": "repair_apply_style",
-    "difficulty": "medium",
-    "expected_stage": "deterministic_or_whole",
-    "goal": "map f (map g xs) = map (f \\<circ> g) xs",
-    "script": "lemma \"map f (map g xs) = map (f \\<circ> g) xs\"\napply (induction xs)\napply simp\napply arith\ndone"
+    "name": "repair_extra_fill_sorry_bool_or_assoc",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "(P \\<or> Q) \\<or> R \\<longleftrightarrow> P \\<or> (Q \\<or> R)",
+    "script": "lemma \"(P \\<or> Q) \\<or> R \\<longleftrightarrow> P \\<or> (Q \\<or> R)\"\n  sorry"
+  },
+  {
+    "name": "repair_extra_fill_sorry_bool_distrib_and_or",
+    "category": "repair_fill",
+    "difficulty": "easy",
+    "goal": "P \\<and> (Q \\<or> R) \\<longleftrightarrow> (P \\<and> Q) \\<or> (P \\<and> R)",
+    "script": "lemma \"P \\<and> (Q \\<or> R) \\<longleftrightarrow> (P \\<and> Q) \\<or> (P \\<and> R)\"\n  sorry"
   }
 ]

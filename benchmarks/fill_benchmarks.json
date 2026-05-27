@@ -3,182 +3,420 @@
     "name": "fill_and_comm",
     "category": "fill_prop_local",
     "difficulty": "easy",
-    "expected_stage": "using_local_assumption",
     "script": "lemma \"A \\<and> B \\<longrightarrow> B \\<and> A\"\nproof\n  assume h: \"A \\<and> B\"\n  show \"B \\<and> A\"\n    sorry\nqed"
   },
   {
     "name": "fill_and_elim_left",
     "category": "fill_prop_local",
     "difficulty": "easy",
-    "expected_stage": "using_local_assumption",
     "script": "lemma \"A \\<and> B \\<longrightarrow> A\"\nproof\n  assume h: \"A \\<and> B\"\n  show A\n    sorry\nqed"
+  },
+  {
+    "name": "fill_and_elim_right",
+    "category": "fill_prop_local",
+    "difficulty": "easy",
+    "script": "lemma \"A \\<and> B \\<longrightarrow> B\"\nproof\n  assume h: \"A \\<and> B\"\n  show B\n    sorry\nqed"
   },
   {
     "name": "fill_imp_refl",
     "category": "fill_prop_local",
     "difficulty": "easy",
-    "expected_stage": "using_local_assumption",
     "script": "lemma \"A \\<longrightarrow> A\"\nproof\n  assume a: A\n  show A\n    sorry\nqed"
   },
   {
+    "name": "fill_double_neg_intro",
+    "category": "fill_prop_local",
+    "difficulty": "easy",
+    "script": "lemma \"A \\<longrightarrow> \\<not> \\<not> A\"\nproof\n  assume a: A\n  show \"\\<not> \\<not> A\"\n    sorry\nqed"
+  },
+  {
     "name": "fill_imp_trans",
-    "category": "fill_prop_nested",
+    "category": "fill_prop_local",
     "difficulty": "medium",
-    "expected_stage": "using_local_assumptions",
     "script": "lemma \"(A \\<longrightarrow> B) \\<longrightarrow> (B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C\"\nproof\n  assume ab: \"A \\<longrightarrow> B\"\n  show \"(B \\<longrightarrow> C) \\<longrightarrow> A \\<longrightarrow> C\"\n  proof\n    assume bc: \"B \\<longrightarrow> C\"\n    show \"A \\<longrightarrow> C\"\n    proof\n      assume a: A\n      show C\n        sorry\n    qed\n  qed\nqed"
   },
   {
     "name": "fill_de_morgan",
     "category": "fill_prop_local",
     "difficulty": "medium",
-    "expected_stage": "using_local_assumption",
     "script": "lemma \"\\<not> A \\<and> \\<not> B \\<longrightarrow> \\<not> (A \\<or> B)\"\nproof\n  assume h: \"\\<not> A \\<and> \\<not> B\"\n  show \"\\<not> (A \\<or> B)\"\n    sorry\nqed"
   },
   {
     "name": "fill_contrapositive",
-    "category": "fill_prop_nested",
+    "category": "fill_prop_local",
     "difficulty": "medium",
-    "expected_stage": "using_local_assumptions",
     "script": "lemma \"(A \\<longrightarrow> B) \\<longrightarrow> \\<not> B \\<longrightarrow> \\<not> A\"\nproof\n  assume ab: \"A \\<longrightarrow> B\"\n  show \"\\<not> B \\<longrightarrow> \\<not> A\"\n  proof\n    assume nb: \"\\<not> B\"\n    show \"\\<not> A\"\n      sorry\n  qed\nqed"
   },
   {
     "name": "fill_ex_intro",
-    "category": "fill_prop_quantifier",
+    "category": "fill_prop_local",
     "difficulty": "medium",
-    "expected_stage": "auto/blast",
     "script": "lemma \"P a \\<longrightarrow> (\\<exists>x. P x)\"\nproof\n  assume h: \"P a\"\n  show \"\\<exists>x. P x\"\n    sorry\nqed"
   },
   {
     "name": "fill_all_elim",
-    "category": "fill_prop_quantifier",
+    "category": "fill_prop_local",
     "difficulty": "medium",
-    "expected_stage": "using_local_assumption",
     "script": "lemma \"(\\<forall>x. P x) \\<longrightarrow> P a\"\nproof\n  assume h: \"\\<forall>x. P x\"\n  show \"P a\"\n    sorry\nqed"
   },
   {
-    "name": "fill_iff_intro",
-    "category": "fill_prop_nested",
-    "difficulty": "medium",
-    "expected_stage": "using_local_assumptions",
-    "script": "lemma \"(A \\<longrightarrow> B) \\<longrightarrow> (B \\<longrightarrow> A) \\<longrightarrow> (A \\<longleftrightarrow> B)\"\nproof\n  assume ab: \"A \\<longrightarrow> B\"\n  show \"(B \\<longrightarrow> A) \\<longrightarrow> (A \\<longleftrightarrow> B)\"\n  proof\n    assume ba: \"B \\<longrightarrow> A\"\n    show \"A \\<longleftrightarrow> B\"\n      sorry\n  qed\nqed"
+    "name": "fill_append_nil_right",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"xs @ [] = xs\"\n  sorry"
   },
   {
-    "name": "fill_distrib_and_or",
-    "category": "fill_prop_local",
-    "difficulty": "medium",
-    "expected_stage": "using_local_facts",
-    "script": "lemma \"A \\<and> (B \\<or> C) \\<longrightarrow> (A \\<and> B) \\<or> (A \\<and> C)\"\nproof\n  assume h: \"A \\<and> (B \\<or> C)\"\n  obtain a disj where a: A and disj: \"B \\<or> C\" using h by auto\n  show \"(A \\<and> B) \\<or> (A \\<and> C)\"\n    sorry\nqed"
+    "name": "fill_append_nil_left",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"[] @ xs = xs\"\n  sorry"
+  },
+  {
+    "name": "fill_append_assoc",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"(xs @ ys) @ zs = xs @ (ys @ zs)\"\n  sorry"
   },
   {
     "name": "fill_rev_rev",
-    "category": "fill_list_top_level",
+    "category": "fill_list_basic",
     "difficulty": "easy",
-    "expected_stage": "direct_method",
     "script": "lemma \"rev (rev xs) = xs\"\n  sorry"
   },
   {
-    "name": "fill_length_append",
-    "category": "fill_list_top_level",
-    "difficulty": "easy",
-    "expected_stage": "direct_method",
-    "script": "lemma \"length (xs @ ys) = length xs + length ys\"\n  sorry"
-  },
-  {
-    "name": "fill_map_append",
-    "category": "fill_list_top_level",
-    "difficulty": "easy",
-    "expected_stage": "direct_method",
-    "script": "lemma \"map f (xs @ ys) = map f xs @ map f ys\"\n  sorry"
-  },
-  {
-    "name": "fill_filter_append",
-    "category": "fill_list_top_level",
-    "difficulty": "easy",
-    "expected_stage": "direct_method",
-    "script": "lemma \"filter P (xs @ ys) = filter P xs @ filter P ys\"\n  sorry"
-  },
-  {
-    "name": "fill_set_append",
-    "category": "fill_list_top_level",
-    "difficulty": "easy",
-    "expected_stage": "direct_method",
-    "script": "lemma \"set (xs @ ys) = set xs \\<union> set ys\"\n  sorry"
-  },
-  {
     "name": "fill_rev_append",
-    "category": "fill_list_top_level",
+    "category": "fill_list_basic",
     "difficulty": "medium",
-    "expected_stage": "direct_method",
     "script": "lemma \"rev (xs @ ys) = rev ys @ rev xs\"\n  sorry"
   },
   {
+    "name": "fill_length_append",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"length (xs @ ys) = length xs + length ys\"\n  sorry"
+  },
+  {
+    "name": "fill_length_rev",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"length (rev xs) = length xs\"\n  sorry"
+  },
+  {
+    "name": "fill_length_map",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"length (map f xs) = length xs\"\n  sorry"
+  },
+  {
+    "name": "fill_map_append",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"map f (xs @ ys) = map f xs @ map f ys\"\n  sorry"
+  },
+  {
     "name": "fill_map_map",
-    "category": "fill_list_top_level",
+    "category": "fill_list_basic",
     "difficulty": "medium",
-    "expected_stage": "direct_method",
     "script": "lemma \"map f (map g xs) = map (f \\<circ> g) xs\"\n  sorry"
   },
   {
-    "name": "fill_foldr_append",
-    "category": "fill_list_top_level",
+    "name": "fill_filter_append",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"filter P (xs @ ys) = filter P xs @ filter P ys\"\n  sorry"
+  },
+  {
+    "name": "fill_filter_filter",
+    "category": "fill_list_basic",
     "difficulty": "medium",
-    "expected_stage": "direct_or_stepwise",
-    "script": "lemma \"foldr f (xs @ ys) z = foldr f xs (foldr f ys z)\"\n  sorry"
+    "script": "lemma \"filter P (filter Q xs) = filter (\\<lambda>x. P x \\<and> Q x) xs\"\n  sorry"
+  },
+  {
+    "name": "fill_take_zero",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"take 0 xs = []\"\n  sorry"
+  },
+  {
+    "name": "fill_drop_zero",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"drop 0 xs = xs\"\n  sorry"
+  },
+  {
+    "name": "fill_take_length_append",
+    "category": "fill_list_basic",
+    "difficulty": "medium",
+    "script": "lemma \"take (length xs) (xs @ ys) = xs\"\n  sorry"
   },
   {
     "name": "fill_drop_length_append",
-    "category": "fill_list_top_level",
+    "category": "fill_list_basic",
     "difficulty": "medium",
-    "expected_stage": "direct_method",
     "script": "lemma \"drop (length xs) (xs @ ys) = ys\"\n  sorry"
   },
   {
-    "name": "fill_nat_add_comm",
-    "category": "fill_nat_top_level",
+    "name": "fill_take_all",
+    "category": "fill_list_basic",
     "difficulty": "easy",
-    "expected_stage": "direct_method",
-    "script": "lemma \"(m::nat) + n = n + m\"\n  sorry"
+    "script": "lemma \"take (length xs) xs = xs\"\n  sorry"
+  },
+  {
+    "name": "fill_drop_all",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"drop (length xs) xs = []\"\n  sorry"
+  },
+  {
+    "name": "fill_hd_cons",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"hd (x # xs) = x\"\n  sorry"
+  },
+  {
+    "name": "fill_tl_cons",
+    "category": "fill_list_basic",
+    "difficulty": "easy",
+    "script": "lemma \"tl (x # xs) = xs\"\n  sorry"
+  },
+  {
+    "name": "fill_set_append",
+    "category": "fill_list_set",
+    "difficulty": "easy",
+    "script": "lemma \"set (xs @ ys) = set xs \\<union> set ys\"\n  sorry"
+  },
+  {
+    "name": "fill_set_rev",
+    "category": "fill_list_set",
+    "difficulty": "easy",
+    "script": "lemma \"set (rev xs) = set xs\"\n  sorry"
+  },
+  {
+    "name": "fill_set_map",
+    "category": "fill_list_set",
+    "difficulty": "easy",
+    "script": "lemma \"set (map f xs) = f ` set xs\"\n  sorry"
+  },
+  {
+    "name": "fill_set_filter",
+    "category": "fill_list_set",
+    "difficulty": "easy",
+    "script": "lemma \"set (filter P xs) = {x \\<in> set xs. P x}\"\n  sorry"
+  },
+  {
+    "name": "fill_remdups_set",
+    "category": "fill_list_set",
+    "difficulty": "medium",
+    "script": "lemma \"set (remdups xs) = set xs\"\n  sorry"
+  },
+  {
+    "name": "fill_remdups_distinct",
+    "category": "fill_list_set",
+    "difficulty": "medium",
+    "script": "lemma \"distinct (remdups xs)\"\n  sorry"
+  },
+  {
+    "name": "fill_distinct_filter",
+    "category": "fill_list_set",
+    "difficulty": "medium",
+    "script": "lemma \"distinct xs \\<Longrightarrow> distinct (filter P xs)\"\n  sorry"
+  },
+  {
+    "name": "fill_list_all_append",
+    "category": "fill_list_pred",
+    "difficulty": "easy",
+    "script": "lemma \"list_all P (xs @ ys) \\<longleftrightarrow> list_all P xs \\<and> list_all P ys\"\n  sorry"
+  },
+  {
+    "name": "fill_list_ex_append",
+    "category": "fill_list_pred",
+    "difficulty": "easy",
+    "script": "lemma \"list_ex P (xs @ ys) \\<longleftrightarrow> list_ex P xs \\<or> list_ex P ys\"\n  sorry"
+  },
+  {
+    "name": "fill_list_all_map",
+    "category": "fill_list_pred",
+    "difficulty": "medium",
+    "script": "lemma \"list_all P (map f xs) \\<longleftrightarrow> list_all (P \\<circ> f) xs\"\n  sorry"
+  },
+  {
+    "name": "fill_takeWhile_append_dropWhile",
+    "category": "fill_list_pred",
+    "difficulty": "medium",
+    "script": "lemma \"takeWhile P xs @ dropWhile P xs = xs\"\n  sorry"
+  },
+  {
+    "name": "fill_foldr_append",
+    "category": "fill_list_fold",
+    "difficulty": "medium",
+    "script": "lemma \"foldr f (xs @ ys) z = foldr f xs (foldr f ys z)\"\n  sorry"
+  },
+  {
+    "name": "fill_foldl_append",
+    "category": "fill_list_fold",
+    "difficulty": "medium",
+    "script": "lemma \"foldl f z (xs @ ys) = foldl f (foldl f z xs) ys\"\n  sorry"
+  },
+  {
+    "name": "fill_length_concat",
+    "category": "fill_list_fold",
+    "difficulty": "medium",
+    "script": "lemma \"length (concat xss) = sum_list (map length xss)\"\n  sorry"
+  },
+  {
+    "name": "fill_map_concat",
+    "category": "fill_list_fold",
+    "difficulty": "medium",
+    "script": "lemma \"map f (concat xss) = concat (map (map f) xss)\"\n  sorry"
+  },
+  {
+    "name": "fill_nat_add_zero_right",
+    "category": "fill_nat",
+    "difficulty": "easy",
+    "script": "lemma \"n + 0 = (n::nat)\"\n  sorry"
+  },
+  {
+    "name": "fill_nat_add_zero_left",
+    "category": "fill_nat",
+    "difficulty": "easy",
+    "script": "lemma \"0 + n = (n::nat)\"\n  sorry"
+  },
+  {
+    "name": "fill_nat_add_comm",
+    "category": "fill_nat",
+    "difficulty": "easy",
+    "script": "lemma \"m + n = n + (m::nat)\"\n  sorry"
+  },
+  {
+    "name": "fill_nat_add_assoc",
+    "category": "fill_nat",
+    "difficulty": "easy",
+    "script": "lemma \"(m + n) + p = m + (n + (p::nat))\"\n  sorry"
+  },
+  {
+    "name": "fill_nat_mul_zero_right",
+    "category": "fill_nat",
+    "difficulty": "easy",
+    "script": "lemma \"n * 0 = (0::nat)\"\n  sorry"
+  },
+  {
+    "name": "fill_nat_mul_one_right",
+    "category": "fill_nat",
+    "difficulty": "easy",
+    "script": "lemma \"n * 1 = (n::nat)\"\n  sorry"
   },
   {
     "name": "fill_nat_mul_comm",
-    "category": "fill_nat_top_level",
+    "category": "fill_nat",
     "difficulty": "medium",
-    "expected_stage": "direct_method",
-    "script": "lemma \"(m::nat) * n = n * m\"\n  sorry"
+    "script": "lemma \"m * n = n * (m::nat)\"\n  sorry"
+  },
+  {
+    "name": "fill_nat_mul_distrib",
+    "category": "fill_nat",
+    "difficulty": "medium",
+    "script": "lemma \"(m + n) * p = m * p + n * (p::nat)\"\n  sorry"
+  },
+  {
+    "name": "fill_nat_pow_succ",
+    "category": "fill_nat",
+    "difficulty": "medium",
+    "script": "lemma \"m ^ (n + 1) = m ^ n * (m::nat)\"\n  sorry"
   },
   {
     "name": "fill_nat_pow_add",
-    "category": "fill_nat_top_level",
+    "category": "fill_nat",
     "difficulty": "medium",
-    "expected_stage": "direct_or_stepwise",
     "script": "lemma \"(m::nat) ^ (n + p) = m ^ n * m ^ p\"\n  sorry"
   },
   {
-    "name": "fill_isar_map_id",
-    "category": "fill_isar_induction",
+    "name": "fill_nat_less_imp_le",
+    "category": "fill_nat_order",
     "difficulty": "easy",
-    "expected_stage": "multi_hole_direct",
-    "script": "lemma \"map id xs = xs\"\nproof (induction xs)\n  case Nil\n  show ?case\n    sorry\nnext\n  case (Cons a as)\n  show ?case\n    sorry\nqed"
+    "script": "lemma \"(n::nat) < m \\<longrightarrow> n \\<le> m\"\n  sorry"
   },
   {
-    "name": "fill_isar_length_replicate",
-    "category": "fill_isar_induction",
-    "difficulty": "medium",
-    "expected_stage": "multi_hole_direct",
-    "script": "lemma \"length (replicate n x) = n\"\nproof (induction n)\n  case 0\n  show ?case\n    sorry\nnext\n  case (Suc n)\n  show ?case\n    sorry\nqed"
+    "name": "fill_nat_le_add_right",
+    "category": "fill_nat_order",
+    "difficulty": "easy",
+    "script": "lemma \"n \\<le> n + (m::nat)\"\n  sorry"
+  },
+  {
+    "name": "fill_nat_lt_succ",
+    "category": "fill_nat_order",
+    "difficulty": "easy",
+    "script": "lemma \"n < Suc n\"\n  sorry"
+  },
+  {
+    "name": "fill_max_nat_comm",
+    "category": "fill_nat_order",
+    "difficulty": "easy",
+    "script": "lemma \"max m n = max n (m::nat)\"\n  sorry"
+  },
+  {
+    "name": "fill_min_nat_comm",
+    "category": "fill_nat_order",
+    "difficulty": "easy",
+    "script": "lemma \"min m n = min n (m::nat)\"\n  sorry"
   },
   {
     "name": "fill_isar_rev_snoc",
-    "category": "fill_isar_induction",
+    "category": "fill_list_isar",
     "difficulty": "medium",
-    "expected_stage": "multi_hole_direct",
     "script": "lemma \"rev (xs @ [x]) = x # rev xs\"\nproof (induction xs)\n  case Nil\n  show ?case\n    sorry\nnext\n  case (Cons a as)\n  show ?case\n    sorry\nqed"
   },
   {
+    "name": "fill_isar_length_replicate",
+    "category": "fill_list_isar",
+    "difficulty": "medium",
+    "script": "lemma \"length (replicate n x) = n\"\nproof (induction n)\n  case 0\n  show ?case\n    sorry\nnext\n  case (Suc n)\n  show ?case\n    sorry\nqed"
+  },
+  {
+    "name": "fill_isar_map_id",
+    "category": "fill_list_isar",
+    "difficulty": "easy",
+    "script": "lemma \"map id xs = xs\"\nproof (induction xs)\n  case Nil\n  show ?case\n    sorry\nnext\n  case (Cons a as)\n  show ?case\n    sorry\nqed"
+  },
+  {
+    "name": "fill_isar_filter_filter",
+    "category": "fill_list_isar",
+    "difficulty": "medium",
+    "script": "lemma \"filter P (filter Q xs) = filter (\\<lambda>x. P x \\<and> Q x) xs\"\nproof (induction xs)\n  case Nil\n  show ?case\n    sorry\nnext\n  case (Cons a as)\n  show ?case\n    sorry\nqed"
+  },
+  {
     "name": "fill_isar_foldl_append",
-    "category": "fill_isar_induction",
+    "category": "fill_list_isar",
     "difficulty": "hard",
-    "expected_stage": "multi_hole_stepwise",
     "script": "lemma \"foldl f z (xs @ ys) = foldl f (foldl f z xs) ys\"\nproof (induction xs arbitrary: z)\n  case Nil\n  show ?case\n    sorry\nnext\n  case (Cons a as)\n  show ?case\n    sorry\nqed"
+  },
+  {
+    "name": "fill_isar_concat_map",
+    "category": "fill_list_isar",
+    "difficulty": "medium",
+    "script": "lemma \"map f (concat xss) = concat (map (map f) xss)\"\nproof (induction xss)\n  case Nil\n  show ?case\n    sorry\nnext\n  case (Cons xs xss)\n  show ?case\n    sorry\nqed"
+  },
+  {
+    "name": "fill_isar_nat_mul_distrib",
+    "category": "fill_nat_isar",
+    "difficulty": "medium",
+    "script": "lemma \"(m + n) * p = m * p + n * (p::nat)\"\nproof (induction m)\n  case 0\n  show ?case\n    sorry\nnext\n  case (Suc m)\n  show ?case\n    sorry\nqed"
+  },
+  {
+    "name": "fill_isar_distinct_filter",
+    "category": "fill_list_isar",
+    "difficulty": "medium",
+    "script": "lemma \"distinct xs \\<Longrightarrow> distinct (filter P xs)\"\nproof (induction xs)\n  case Nil\n  show ?case\n    sorry\nnext\n  case (Cons a as)\n  show ?case\n    sorry\nqed"
+  },
+  {
+    "name": "fill_isar_insort_set",
+    "category": "fill_list_isar",
+    "difficulty": "medium",
+    "script": "lemma \"set (insort x xs) = insert x (set xs)\"\nproof (induction xs)\n  case Nil\n  show ?case\n    sorry\nnext\n  case (Cons a as)\n  show ?case\n    sorry\nqed"
+  },
+  {
+    "name": "fill_isar_card_le_length",
+    "category": "fill_list_isar",
+    "difficulty": "hard",
+    "script": "lemma \"card (set xs) \\<le> length xs\"\nproof (induction xs)\n  case Nil\n  show ?case\n    sorry\nnext\n  case (Cons a as)\n  show ?case\n    sorry\nqed"
   }
 ]
